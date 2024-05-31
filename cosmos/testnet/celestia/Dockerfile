@@ -1,20 +1,20 @@
 ARG GO_VERSION
 FROM golang:$GO_VERSION
 
-ARG RPC_URL
-ARG CHAIN_ID
+ARG REPO
 ARG PROJECT_FOLDER
 ARG VERSION
-ARG REPO
-ARG GENESIS_FILE
-ARG ADDRBOOK
-ARG DENOM
-ARG MIN_GAS_PRICES
-ARG MONIKER
 ARG DAEMON_NAME
+ARG CHAIN_ID
+ARG MONIKER
+ARG GENESIS_FILE
 ARG DAEMON_HOME
+ARG ADDRBOOK
 ARG PEERS
 ARG SEEDS
+ARG MIN_GAS_PRICES
+ARG DENOM
+ARG RPC_URL
 
 WORKDIR /root
 
@@ -22,34 +22,35 @@ RUN apt-get update && \
     apt-get install -y curl jq git build-essential tar wget clang pkg-config libssl-dev bsdmainutils make ncdu gcc chrony liblz4-tool htop net-tools lsof aria2 && \
     rm -rf /var/lib/apt/lists/*
 
-ENV RPC_URL=${RPC_URL}
-ENV CHAIN_ID=${CHAIN_ID}
+ENV REPO=${REPO}
 ENV PROJECT_FOLDER=${PROJECT_FOLDER}
 ENV VERSION=${VERSION}
-ENV REPO=${REPO}
-ENV GENESIS_FILE=${GENESIS_FILE}
-ENV ADDRBOOK=${ADDRBOOK}
-ENV DENOM=${DENOM}
-ENV MIN_GAS_PRICES=${MIN_GAS_PRICES}
-ENV MONIKER=${MONIKER}
 ENV DAEMON_NAME=${DAEMON_NAME}
+ENV CHAIN_ID=${CHAIN_ID}
+ENV MONIKER=${MONIKER}
+ENV GENESIS_FILE=${GENESIS_FILE}
 ENV DAEMON_HOME=${DAEMON_HOME}
+ENV ADDRBOOK=${ADDRBOOK}
 ENV PEERS=${PEERS}
 ENV SEEDS=${SEEDS}
+ENV MIN_GAS_PRICES=${MIN_GAS_PRICES}
+ENV DENOM=${DENOM}
+ENV RPC_URL=${RPC_URL}
 
-RUN echo "export CHAIN_ID=${CHAIN_ID}" >> $HOME/.bash_profile && \
+RUN echo "export REPO=${REPO}" >> $HOME/.bash_profile && \
     echo "export PROJECT_FOLDER=${PROJECT_FOLDER}" >> $HOME/.bash_profile && \
     echo "export VERSION=${VERSION}" >> $HOME/.bash_profile && \
-    echo "export REPO=${REPO}" >> $HOME/.bash_profile && \
-    echo "export GENESIS_FILE=${GENESIS_FILE}" >> $HOME/.bash_profile && \
-    echo "export ADDRBOOK=${ADDRBOOK}" >> $HOME/.bash_profile && \
-    echo "export DENOM=${DENOM}" >> $HOME/.bash_profile && \
-    echo "export MIN_GAS_PRICES=${MIN_GAS_PRICES}" >> $HOME/.bash_profile && \
-    echo "export MONIKER=${MONIKER}" >> $HOME/.bash_profile && \
     echo "export DAEMON_NAME=${DAEMON_NAME}" >> $HOME/.bash_profile && \
+    echo "export CHAIN_ID=${CHAIN_ID}" >> $HOME/.bash_profile && \
+    echo "export MONIKER=${MONIKER}" >> $HOME/.bash_profile && \
+    echo "export GENESIS_FILE=${GENESIS_FILE}" >> $HOME/.bash_profile && \
     echo "export DAEMON_HOME=${DAEMON_HOME}" >> $HOME/.bash_profile && \
+    echo "export ADDRBOOK=${ADDRBOOK}" >> $HOME/.bash_profile && \
     echo "export PEERS=${PEERS}" >> $HOME/.bash_profile && \
-    echo "export SEEDS=${SEEDS}" >> $HOME/.bash_profile
+    echo "export SEEDS=${SEEDS}" >> $HOME/.bash_profile && \
+    echo "export MIN_GAS_PRICES=${MIN_GAS_PRICES}" >> $HOME/.bash_profile && \
+    echo "export DENOM=${DENOM}" >> $HOME/.bash_profile && \
+    echo "export RPC_URL=${RPC_URL}" >> $HOME/.bash_profile
 
 RUN git clone ${REPO} ${PROJECT_FOLDER}
 
