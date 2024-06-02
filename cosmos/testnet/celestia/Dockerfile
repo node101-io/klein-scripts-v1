@@ -14,7 +14,6 @@ ARG PEERS
 ARG SEEDS
 ARG MIN_GAS_PRICES
 ARG DENOM
-ARG RPC_URL
 
 WORKDIR /root
 
@@ -35,22 +34,22 @@ ENV PEERS=${PEERS}
 ENV SEEDS=${SEEDS}
 ENV MIN_GAS_PRICES=${MIN_GAS_PRICES}
 ENV DENOM=${DENOM}
-ENV RPC_URL=${RPC_URL}
 
-RUN echo "export REPO=${REPO}" >> $HOME/.bash_profile && \
-    echo "export PROJECT_FOLDER=${PROJECT_FOLDER}" >> $HOME/.bash_profile && \
-    echo "export VERSION=${VERSION}" >> $HOME/.bash_profile && \
-    echo "export DAEMON_NAME=${DAEMON_NAME}" >> $HOME/.bash_profile && \
-    echo "export CHAIN_ID=${CHAIN_ID}" >> $HOME/.bash_profile && \
-    echo "export MONIKER=${MONIKER}" >> $HOME/.bash_profile && \
-    echo "export GENESIS_FILE=${GENESIS_FILE}" >> $HOME/.bash_profile && \
-    echo "export DAEMON_HOME=${DAEMON_HOME}" >> $HOME/.bash_profile && \
-    echo "export ADDRBOOK=${ADDRBOOK}" >> $HOME/.bash_profile && \
-    echo "export PEERS=${PEERS}" >> $HOME/.bash_profile && \
-    echo "export SEEDS=${SEEDS}" >> $HOME/.bash_profile && \
-    echo "export MIN_GAS_PRICES=${MIN_GAS_PRICES}" >> $HOME/.bash_profile && \
-    echo "export DENOM=${DENOM}" >> $HOME/.bash_profile && \
-    echo "export RPC_URL=${RPC_URL}" >> $HOME/.bash_profile
+RUN cat << EOF >> $HOME/.bash_profile \
+    export REPO=${REPO} \
+    export PROJECT_FOLDER=${PROJECT_FOLDER} \
+    export VERSION=${VERSION} \
+    export DAEMON_NAME=${DAEMON_NAME} \
+    export CHAIN_ID=${CHAIN_ID} \
+    export MONIKER=${MONIKER} \
+    export GENESIS_FILE=${GENESIS_FILE} \
+    export DAEMON_HOME=${DAEMON_HOME} \
+    export ADDRBOOK=${ADDRBOOK} \
+    export PEERS=${PEERS} \
+    export SEEDS=${SEEDS} \
+    export MIN_GAS_PRICES=${MIN_GAS_PRICES} \
+    export DENOM=${DENOM} \
+    EOF
 
 RUN git clone ${REPO} ${PROJECT_FOLDER}
 
@@ -77,6 +76,9 @@ RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
 
 RUN mkdir -p ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN cp ${GOPATH}/bin/${DAEMON_NAME} ${DAEMON_HOME}/cosmovisor/genesis/bin
+
+RUN rm -rf ${DAEMON_HOME}/data/* && \
+    curl -Ls ${SNAPSHOT} | tar -I lz4 -xf - -C ${DAEMON_HOME}
 
 EXPOSE 26656 26657 1317
 
