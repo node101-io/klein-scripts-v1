@@ -17,7 +17,7 @@ services:
         SEEDS: SEEDS_PLACEHOLDER
         MIN_GAS_PRICES: MIN_GAS_PRICES_PLACEHOLDER
         DENOM: DENOM_PLACEHOLDER
-        SNAPSHOT: https://snapshots.kjnodes.com/celestia/snapshot_latest.tar.lz4
+        SNAPSHOT: https://snapshots.kjnodes.com/celestia-testnet/snapshot_latest.tar.lz4
     container_name: klein-node-celestia
     restart: always
     ports:
