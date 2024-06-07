@@ -35,21 +35,19 @@ ENV SEEDS=${SEEDS}
 ENV MIN_GAS_PRICES=${MIN_GAS_PRICES}
 ENV DENOM=${DENOM}
 
-RUN cat << EOF >> $HOME/.bash_profile \
-    export REPO=${REPO} \
-    export PROJECT_FOLDER=${PROJECT_FOLDER} \
-    export VERSION=${VERSION} \
-    export DAEMON_NAME=${DAEMON_NAME} \
-    export CHAIN_ID=${CHAIN_ID} \
-    export MONIKER=${MONIKER} \
-    export GENESIS_FILE=${GENESIS_FILE} \
-    export DAEMON_HOME=${DAEMON_HOME} \
-    export ADDRBOOK=${ADDRBOOK} \
-    export PEERS=${PEERS} \
-    export SEEDS=${SEEDS} \
-    export MIN_GAS_PRICES=${MIN_GAS_PRICES} \
-    export DENOM=${DENOM} \
-    EOF
+RUN echo "export REPO=${REPO}" >> $HOME/.bash_profile \
+    echo "export PROJECT_FOLDER=${PROJECT_FOLDER}" >> $HOME/.bash_profile \
+    echo "export VERSION=${VERSION}" >> $HOME/.bash_profile \
+    echo "export DAEMON_NAME=${DAEMON_NAME}" >> $HOME/.bash_profile \
+    echo "export CHAIN_ID=${CHAIN_ID}" >> $HOME/.bash_profile \
+    echo "export MONIKER=${MONIKER}" >> $HOME/.bash_profile \
+    echo "export GENESIS_FILE=${GENESIS_FILE}" >> $HOME/.bash_profile \
+    echo "export DAEMON_HOME=${DAEMON_HOME}" >> $HOME/.bash_profile \
+    echo "export ADDRBOOK=${ADDRBOOK}" >> $HOME/.bash_profile \
+    echo "export PEERS=${PEERS}" >> $HOME/.bash_profile \
+    echo "export SEEDS=${SEEDS}" >> $HOME/.bash_profile \
+    echo "export MIN_GAS_PRICES=${MIN_GAS_PRICES}" >> $HOME/.bash_profile \
+    echo "export DENOM=${DENOM}" >> $HOME/.bash_profile
 
 RUN git clone ${REPO} ${PROJECT_FOLDER}
 
