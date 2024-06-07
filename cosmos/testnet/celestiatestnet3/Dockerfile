@@ -75,7 +75,9 @@ RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
 RUN mkdir -p ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN cp ${GOPATH}/bin/${DAEMON_NAME} ${DAEMON_HOME}/cosmovisor/genesis/bin
 
-RUN rm -rf ${DAEMON_HOME}/data/* && \
+RUN cp ${DAEMON_HOME}/data/priv_validator_state.json ${DAEMON_HOME}/priv_validator_state.json.backup && \
+    rm -rf ${DAEMON_HOME}/data/* && \
+    mv ${DAEMON_HOME}/priv_validator_state.json.backup ${DAEMON_HOME}/data/priv_validator_state.json && \
     curl -Ls ${SNAPSHOT} | tar -I lz4 -xf - -C ${DAEMON_HOME}
 
 EXPOSE 26656 26657 1317
