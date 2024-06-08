@@ -70,7 +70,7 @@ RUN sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"${PEERS}\"|" ${DAEM
     sed -i -e "s|^seeds *=.*|seeds = \"${SEEDS}\"|" ${DAEMON_HOME}/config/config.toml && \
     sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"${MIN_GAS_PRICES}${DENOM}\"/" ${DAEMON_HOME}/config/app.toml
 
-RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
+RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 
 RUN mkdir -p ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN cp ${GOPATH}/bin/${DAEMON_NAME} ${DAEMON_HOME}/cosmovisor/genesis/bin
