@@ -66,8 +66,8 @@ RUN ${DAEMON_NAME} init ${MONIKER} --chain-id ${CHAIN_ID}
 RUN curl -Ls ${GENESIS_FILE} -o ${DAEMON_HOME}/config/genesis.json
 RUN curl -Ls ${ADDRBOOK} -o ${DAEMON_HOME}/config/addrbook.json
 
-RUN sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"$PEERS\"|" ${DAEMON_HOME}/config/config.toml && \
-    sed -i -e "s|^seeds *=.*|seeds = \"$SEEDS\"|" ${DAEMON_HOME}/config/config.toml && \
+RUN sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"${PEERS}\"|" ${DAEMON_HOME}/config/config.toml && \
+    sed -i -e "s|^seeds *=.*|seeds = \"${SEEDS}\"|" ${DAEMON_HOME}/config/config.toml && \
     sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"${MIN_GAS_PRICES}${DENOM}\"/" ${DAEMON_HOME}/config/app.toml
 
 RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.4.0
