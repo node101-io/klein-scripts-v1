@@ -14,6 +14,7 @@ ARG PEERS
 ARG SEEDS
 ARG MIN_GAS_PRICES
 ARG DENOM
+ARG SNAPSHOT
 
 WORKDIR /root
 
@@ -34,6 +35,7 @@ ENV PEERS=${PEERS}
 ENV SEEDS=${SEEDS}
 ENV MIN_GAS_PRICES=${MIN_GAS_PRICES}
 ENV DENOM=${DENOM}
+ENV SNAPSHOT=${SNAPSHOT}
 
 RUN echo "export REPO=${REPO}" >> $HOME/.bash_profile \
     echo "export PROJECT_FOLDER=${PROJECT_FOLDER}" >> $HOME/.bash_profile \
@@ -78,7 +80,7 @@ RUN cp ${GOPATH}/bin/${DAEMON_NAME} ${DAEMON_HOME}/cosmovisor/genesis/bin
 RUN cp ${DAEMON_HOME}/data/priv_validator_state.json ${DAEMON_HOME}/priv_validator_state.json.backup && \
     rm -rf ${DAEMON_HOME}/data/* && \
     mv ${DAEMON_HOME}/priv_validator_state.json.backup ${DAEMON_HOME}/data/priv_validator_state.json && \
-    curl -Ls ${SNAPSHOT} | tar -I lz4 -xf - -C ${DAEMON_HOME}
+    curl -L ${SNAPSHOT} | tar -I lz4 -xf - -C ${DAEMON_HOME}
 
 EXPOSE 26656 26657 1317 9090
 
