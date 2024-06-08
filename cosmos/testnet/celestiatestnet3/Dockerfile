@@ -80,6 +80,6 @@ RUN cp ${DAEMON_HOME}/data/priv_validator_state.json ${DAEMON_HOME}/priv_validat
     mv ${DAEMON_HOME}/priv_validator_state.json.backup ${DAEMON_HOME}/data/priv_validator_state.json && \
     curl -Ls ${SNAPSHOT} | tar -I lz4 -xf - -C ${DAEMON_HOME}
 
-EXPOSE 26656 26657 1317
+EXPOSE 26656 26657 1317 9090
 
 CMD [ "cosmovisor", "run", "start" ]

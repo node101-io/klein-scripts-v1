@@ -21,7 +21,10 @@ services:
     container_name: klein-node
     restart: always
     ports:
-      - 26657:3000
+      - 26657:26657
+      - 26656:26656
+      - 1317:1317
+      - 9090:9090
     volumes:
       - klein-node-volume:/root/.celestia-app
 volumes:
