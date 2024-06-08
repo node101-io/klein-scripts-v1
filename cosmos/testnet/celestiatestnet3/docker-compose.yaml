@@ -18,11 +18,11 @@ services:
         MIN_GAS_PRICES: MIN_GAS_PRICES_PLACEHOLDER
         DENOM: DENOM_PLACEHOLDER
         SNAPSHOT: https://snapshots.kjnodes.com/celestia-testnet/snapshot_latest.tar.lz4
-    container_name: klein-node-celestia
+    container_name: klein-node
     restart: always
     ports:
       - 26657:3000
     volumes:
-      - celestia-volume:/root/.celestia-app
+      - klein-node-volume:/root/.celestia-app
 volumes:
-  celestia-volume:
+  klein-node-volume:
