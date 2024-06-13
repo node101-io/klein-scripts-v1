@@ -27,5 +27,7 @@ services:
       - 9090:9090
     volumes:
       - klein-node-volume:/root/.celestia-app
+      - klein-scripts-volume:/root/klein-scripts
 volumes:
   klein-node-volume:
+  klein-scripts-volume:

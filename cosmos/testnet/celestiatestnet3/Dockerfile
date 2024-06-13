@@ -82,6 +82,11 @@ RUN cp ${DAEMON_HOME}/data/priv_validator_state.json ${DAEMON_HOME}/priv_validat
     mv ${DAEMON_HOME}/priv_validator_state.json.backup ${DAEMON_HOME}/data/priv_validator_state.json && \
     curl ${SNAPSHOT} | lz4 -dc - | tar -xf - -C ${DAEMON_HOME}
 
+RUN mkdir -p /root/scripts && \
+    echo '#!/bin/bash' > /root/scripts/get_env_variable.sh && \
+    echo 'printenv $1' >> /root/scripts/get_env_variable.sh && \
+    chmod +x /root/scripts/get_env_variable.sh
+
 EXPOSE 26656 26657 1317 9090
 
 CMD [ "cosmovisor", "run", "start" ]
