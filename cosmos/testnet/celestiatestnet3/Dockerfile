@@ -13,7 +13,8 @@ ARG DAEMON_HOME
 ARG ADDRBOOK
 ARG PEERS
 ARG SEEDS
-ARG MIN_GAS_PRICES
+ARG MIN_GAS_PRICE
+ARG AVERAGE_GAS_PRICE
 ARG DENOM
 ARG SNAPSHOT
 
@@ -35,7 +36,8 @@ ENV DAEMON_HOME=${DAEMON_HOME}
 ENV ADDRBOOK=${ADDRBOOK}
 ENV PEERS=${PEERS}
 ENV SEEDS=${SEEDS}
-ENV MIN_GAS_PRICES=${MIN_GAS_PRICES}
+ENV MIN_GAS_PRICE=${MIN_GAS_PRICE}
+ENV AVERAGE_GAS_PRICE=${AVERAGE_GAS_PRICE}
 ENV DENOM=${DENOM}
 ENV SNAPSHOT=${SNAPSHOT}
 
@@ -51,7 +53,8 @@ RUN echo "export REPO=${REPO}" >> $HOME/.bash_profile \
     echo "export ADDRBOOK=${ADDRBOOK}" >> $HOME/.bash_profile \
     echo "export PEERS=${PEERS}" >> $HOME/.bash_profile \
     echo "export SEEDS=${SEEDS}" >> $HOME/.bash_profile \
-    echo "export MIN_GAS_PRICES=${MIN_GAS_PRICES}" >> $HOME/.bash_profile \
+    echo "export MIN_GAS_PRICE=${MIN_GAS_PRICE}" >> $HOME/.bash_profile \
+    echo "export AVERAGE_GAS_PRICE=${AVERAGE_GAS_PRICE}" >> $HOME/.bash_profile \
     echo "export DENOM=${DENOM}" >> $HOME/.bash_profile
 
 RUN git clone ${REPO} ${PROJECT_FOLDER}
@@ -73,7 +76,7 @@ RUN curl -Ls ${ADDRBOOK} -o ${DAEMON_HOME}/config/addrbook.json
 
 RUN sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"${PEERS}\"|" ${DAEMON_HOME}/config/config.toml && \
     sed -i -e "s|^seeds *=.*|seeds = \"${SEEDS}\"|" ${DAEMON_HOME}/config/config.toml && \
-    sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"${MIN_GAS_PRICES}${DENOM}\"/" ${DAEMON_HOME}/config/app.toml
+    sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"${MIN_GAS_PRICE}${DENOM}\"/" ${DAEMON_HOME}/config/app.toml
 
 RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 
