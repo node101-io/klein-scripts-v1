@@ -8,7 +8,6 @@ services:
         PROJECT_FOLDER: celestia-app
         VERSION: VERSION_PLACEHOLDER
         DAEMON_NAME: celestia-appd
-        DAEMON_ALLOW_DOWNLOAD_BINARIES: "true"
         CHAIN_ID: CHAIN_ID_PLACEHOLDER
         MONIKER: MONIKER_PLACEHOLDER
         GENESIS_FILE: GENESIS_FILE_PLACEHOLDER # TODO: example.rpc/genesis_chunked
