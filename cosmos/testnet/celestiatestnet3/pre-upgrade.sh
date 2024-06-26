@@ -1,0 +1,1 @@
+echo 'no pre-upgrade script for now'
