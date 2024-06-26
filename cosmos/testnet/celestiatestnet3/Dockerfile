@@ -80,8 +80,8 @@ RUN sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"${PEERS}\"|" ${DAEM
 
 RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 
-RUN mkdir -p ${DAEMON_HOME}/cosmovisor/genesis/bin \
-    cp ${GOPATH}/bin/${DAEMON_NAME} ${DAEMON_HOME}/cosmovisor/genesis/bin \
+RUN mkdir -p ${DAEMON_HOME}/cosmovisor/genesis/bin && \
+    cp ${GOPATH}/bin/${DAEMON_NAME} ${DAEMON_HOME}/cosmovisor/genesis/bin && \
     touch ${DAEMON_HOME}/cosmovisor/pre-upgrade.sh
 
 RUN cp ${DAEMON_HOME}/data/priv_validator_state.json ${DAEMON_HOME}/priv_validator_state.json.backup && \
