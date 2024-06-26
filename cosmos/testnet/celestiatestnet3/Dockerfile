@@ -27,7 +27,6 @@ ENV REPO=${REPO}
 ENV PROJECT_FOLDER=${PROJECT_FOLDER}
 ENV VERSION=${VERSION}
 ENV DAEMON_NAME=${DAEMON_NAME}
-ENV DAEMON_ALLOW_DOWNLOAD_BINARIES='true'
 ENV CHAIN_ID=${CHAIN_ID}
 ENV MONIKER=${MONIKER}
 ENV GENESIS_FILE=${GENESIS_FILE}
@@ -39,6 +38,8 @@ ENV MIN_GAS_PRICE=${MIN_GAS_PRICE}
 ENV AVERAGE_GAS_PRICE=${AVERAGE_GAS_PRICE}
 ENV DENOM=${DENOM}
 ENV SNAPSHOT=${SNAPSHOT}
+ENV DAEMON_ALLOW_DOWNLOAD_BINARIES='true'
+ENV COSMOVISOR_CUSTOM_PREUPGRADE='pre-upgrade.sh'
 
 RUN echo "export REPO=${REPO}" >> $HOME/.bash_profile \
     echo "export PROJECT_FOLDER=${PROJECT_FOLDER}" >> $HOME/.bash_profile \
@@ -79,8 +80,9 @@ RUN sed -i -e "s|^persistent_peers *=.*|persistent_peers = \"${PEERS}\"|" ${DAEM
 
 RUN go install cosmossdk.io/tools/cosmovisor/cmd/cosmovisor@v1.5.0
 
-RUN mkdir -p ${DAEMON_HOME}/cosmovisor/genesis/bin
-RUN cp ${GOPATH}/bin/${DAEMON_NAME} ${DAEMON_HOME}/cosmovisor/genesis/bin
+RUN mkdir -p ${DAEMON_HOME}/cosmovisor/genesis/bin \
+    cp ${GOPATH}/bin/${DAEMON_NAME} ${DAEMON_HOME}/cosmovisor/genesis/bin \
+    touch ${DAEMON_HOME}/cosmovisor/pre-upgrade.sh
 
 RUN cp ${DAEMON_HOME}/data/priv_validator_state.json ${DAEMON_HOME}/priv_validator_state.json.backup && \
     rm -rf ${DAEMON_HOME}/data/* && \
