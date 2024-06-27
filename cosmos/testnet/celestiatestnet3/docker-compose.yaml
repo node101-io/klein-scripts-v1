@@ -22,7 +22,7 @@ services:
     container_name: klein-node
     restart: always
     ports:
-      - 26657:26657
+      - 127.0.0.1:26657:26657
       - 26656:26656
       - 1317:1317
       - 9090:9090
