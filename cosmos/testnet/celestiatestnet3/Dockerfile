@@ -41,20 +41,20 @@ ENV SNAPSHOT=${SNAPSHOT}
 ENV DAEMON_ALLOW_DOWNLOAD_BINARIES='true'
 ENV COSMOVISOR_CUSTOM_PREUPGRADE='pre-upgrade.sh'
 
-RUN echo "export REPO=${REPO}" >> $HOME/.bash_profile \
-    echo "export PROJECT_FOLDER=${PROJECT_FOLDER}" >> $HOME/.bash_profile \
-    echo "export VERSION=${VERSION}" >> $HOME/.bash_profile \
-    echo "export DAEMON_NAME=${DAEMON_NAME}" >> $HOME/.bash_profile \
-    echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=${DAEMON_ALLOW_DOWNLOAD_BINARIES}" >> $HOME/.bash_profile \
-    echo "export CHAIN_ID=${CHAIN_ID}" >> $HOME/.bash_profile \
-    echo "export MONIKER=${MONIKER}" >> $HOME/.bash_profile \
-    echo "export GENESIS_FILE=${GENESIS_FILE}" >> $HOME/.bash_profile \
-    echo "export DAEMON_HOME=${DAEMON_HOME}" >> $HOME/.bash_profile \
-    echo "export ADDRBOOK=${ADDRBOOK}" >> $HOME/.bash_profile \
-    echo "export PEERS=${PEERS}" >> $HOME/.bash_profile \
-    echo "export SEEDS=${SEEDS}" >> $HOME/.bash_profile \
-    echo "export MIN_GAS_PRICE=${MIN_GAS_PRICE}" >> $HOME/.bash_profile \
-    echo "export AVERAGE_GAS_PRICE=${AVERAGE_GAS_PRICE}" >> $HOME/.bash_profile \
+RUN echo "export REPO=${REPO}" >> $HOME/.bash_profile && \
+    echo "export PROJECT_FOLDER=${PROJECT_FOLDER}" >> $HOME/.bash_profile && \
+    echo "export VERSION=${VERSION}" >> $HOME/.bash_profile && \
+    echo "export DAEMON_NAME=${DAEMON_NAME}" >> $HOME/.bash_profile && \
+    echo "export DAEMON_ALLOW_DOWNLOAD_BINARIES=${DAEMON_ALLOW_DOWNLOAD_BINARIES}" >> $HOME/.bash_profile && \
+    echo "export CHAIN_ID=${CHAIN_ID}" >> $HOME/.bash_profile && \
+    echo "export MONIKER=${MONIKER}" >> $HOME/.bash_profile && \
+    echo "export GENESIS_FILE=${GENESIS_FILE}" >> $HOME/.bash_profile && \
+    echo "export DAEMON_HOME=${DAEMON_HOME}" >> $HOME/.bash_profile && \
+    echo "export ADDRBOOK=${ADDRBOOK}" >> $HOME/.bash_profile && \
+    echo "export PEERS=${PEERS}" >> $HOME/.bash_profile && \
+    echo "export SEEDS=${SEEDS}" >> $HOME/.bash_profile && \
+    echo "export MIN_GAS_PRICE=${MIN_GAS_PRICE}" >> $HOME/.bash_profile && \
+    echo "export AVERAGE_GAS_PRICE=${AVERAGE_GAS_PRICE}" >> $HOME/.bash_profile && \
     echo "export DENOM=${DENOM}" >> $HOME/.bash_profile
 
 RUN git clone ${REPO} ${PROJECT_FOLDER}
