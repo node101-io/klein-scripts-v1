@@ -21,6 +21,8 @@ services:
         SNAPSHOT: https://testnet-files.itrocket.net/celestia/snap_celestia.tar.lz4
     container_name: klein-node
     restart: always
+    expose:
+      - 26657
     ports:
       - 127.0.0.1:26657:26657
       - 26656:26656
