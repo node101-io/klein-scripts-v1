@@ -71,10 +71,10 @@ RUN ${DAEMON_NAME} config keyring-backend test
 RUN ${DAEMON_NAME} config node tcp://localhost:26657
 RUN ${DAEMON_NAME} init ${MONIKER} --chain-id ${CHAIN_ID}
 
-RUN sed -i -e 's|^persistent_peers *=.*|persistent_peers = "${PEERS}"|' ${DAEMON_HOME}/config/config.toml && \
-    sed -i -e 's|^seeds *=.*|seeds = "${SEEDS}"|' ${DAEMON_HOME}/config/config.toml && \
+RUN sed -i -e 's|^persistent_peers *=.*|persistent_peers = \"${PEERS}\"|' ${DAEMON_HOME}/config/config.toml && \
+    sed -i -e 's|^seeds *=.*|seeds = \"${SEEDS}\"|' ${DAEMON_HOME}/config/config.toml && \
     sed -i -e '/\[rpc\]/,/^\[/ s|^laddr *=.*|laddr = "tcp://0.0.0.0:26657"|' ${DAEMON_HOME}/config/config.toml && \
-    sed -i -e 's|^minimum-gas-prices *=.*|minimum-gas-prices = "${MIN_GAS_PRICE}${DENOM}"|' ${DAEMON_HOME}/config/app.toml
+    sed -i -e 's|^minimum-gas-prices *=.*|minimum-gas-prices = \"${MIN_GAS_PRICE}${DENOM}\"|' ${DAEMON_HOME}/config/app.toml
 
 RUN curl -Ls ${GENESIS_FILE} -o ${DAEMON_HOME}/config/genesis.json
 RUN curl -Ls ${ADDRBOOK} -o ${DAEMON_HOME}/config/addrbook.json
