@@ -19,8 +19,8 @@ ARG SNAPSHOT
 
 WORKDIR /root
 
-RUN apt-get update && \
-    apt-get install -y curl jq git build-essential tar wget clang pkg-config libssl-dev bsdmainutils make ncdu gcc chrony liblz4-tool htop net-tools lsof aria2 && \
+RUN apt update && \
+    apt install -y curl jq git build-essential tar wget clang pkg-config libssl-dev bsdmainutils make ncdu gcc chrony liblz4-tool htop net-tools lsof aria2 && \
     rm -rf /var/lib/apt/lists/*
 
 ENV REPO=${REPO}
