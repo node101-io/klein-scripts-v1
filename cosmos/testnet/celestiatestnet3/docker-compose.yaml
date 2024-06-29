@@ -29,7 +29,6 @@ services:
     volumes:
       - klein-node-volume:/root/.celestia-app
       - klein-scripts-volume:/root/klein-scripts
-      - klein-shared-volume:/root/klein-shared-volume
 volumes:
   klein-node-volume:
     driver: local
@@ -43,9 +42,3 @@ volumes:
       o: bind
       type: none
       device: $HOME/klein-scripts-volume
-  klein-shared-volume:
-    driver: local
-    driver_opts:
-      o: bind
-      type: none
-      device: $HOME/klein-shared-volume
