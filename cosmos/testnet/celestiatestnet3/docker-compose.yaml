@@ -4,20 +4,20 @@ services:
       context: .
       args:
         GO_VERSION: 1.22
-        REPO: REPO_PLACEHOLDER
+        REPO: https://github.com/celestiaorg/celestia-app
         PROJECT_FOLDER: celestia-app
-        VERSION: VERSION_PLACEHOLDER
+        VERSION: v1.11.0
         DAEMON_NAME: celestia-appd
-        CHAIN_ID: CHAIN_ID_PLACEHOLDER
-        MONIKER: MONIKER_PLACEHOLDER
-        GENESIS_FILE: GENESIS_FILE_PLACEHOLDER # TODO: example.rpc/genesis_chunked
+        CHAIN_ID: mocha-4
+        MONIKER: klein_node_1719646612935
+        GENESIS_FILE: https://raw.githubusercontent.com/celestiaorg/networks/master/mocha-4/genesis.json # TODO: example.rpc/genesis_chunked
         DAEMON_HOME: /root/.celestia-app
         ADDRBOOK: https://snapshots.polkachu.com/testnet-addrbook/cosmos/addrbook.json
-        PEERS: PEERS_PLACEHOLDER
-        SEEDS: SEEDS_PLACEHOLDER
-        MIN_GAS_PRICE: MIN_GAS_PRICE_PLACEHOLDER
-        AVERAGE_GAS_PRICE: AVERAGE_GAS_PRICE_PLACEHOLDER
-        DENOM: DENOM_PLACEHOLDER
+        PEERS: 9fb6591b29085e2ebbc3ad595634de19ff22533d@185.38.19.202:26656,8c780fa4df00621926a9b20e80410895548cb0d9@51.159.215.215:26656,de181ebe22ce14483abbb8695bdb43c1169246af@185.144.99.223:26656,85aef6d15d0197baff696b6e31c88e0f21073c59@162.55.245.144:2400,10b8c489f50cd1fa851488bc914d723d8a57cacf@103.219.171.47:26656
+        SEEDS: 3314051954fc072a0678ec0cbac690ad8676ab98@65.108.66.220:26656,8542cd7e6bf9d260fef543bc49e59be5a3fa9074@seed.publicnode.com:26656,8c780fa4df00621926a9b20e80410895548cb0d9@mocha-full.avril14th.org:26656,5d0bf034d6e6a8b5ee31a2f42f753f1107b3a00e@celestia-testnet-seed.itrocket.net:11656,de181ebe22ce14483abbb8695bdb43c1169246af@185.144.99.223:26656
+        MIN_GAS_PRICE: 0
+        AVERAGE_GAS_PRICE: 0.02
+        DENOM: utia
         SNAPSHOT: https://testnet-files.itrocket.net/celestia/snap_celestia.tar.lz4
     container_name: klein-node
     restart: always
@@ -29,6 +29,23 @@ services:
     volumes:
       - klein-node-volume:/root/.celestia-app
       - klein-scripts-volume:/root/klein-scripts
+      - klein-shared-volume:/root/klein-shared-volume
 volumes:
   klein-node-volume:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: $HOME/klein-node-volume
   klein-scripts-volume:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: $HOME/klein-scripts-volume
+  klein-shared-volume:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: $HOME/klein-shared-volume
