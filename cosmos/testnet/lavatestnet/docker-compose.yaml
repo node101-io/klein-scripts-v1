@@ -31,4 +31,14 @@ services:
       - klein-scripts-volume:/root/klein-scripts
 volumes:
   klein-node-volume:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: $HOME/klein-node-volume
   klein-scripts-volume:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: $HOME/klein-scripts-volume
