@@ -89,7 +89,8 @@ RUN mkdir -p ${DAEMON_HOME}/cosmovisor/genesis/bin && \
 RUN cp ${DAEMON_HOME}/data/priv_validator_state.json ${DAEMON_HOME}/priv_validator_state.json.backup && \
     rm -rf ${DAEMON_HOME}/data/* && \
     mv ${DAEMON_HOME}/priv_validator_state.json.backup ${DAEMON_HOME}/data/priv_validator_state.json && \
-    curl ${SNAPSHOT} | lz4 -dc - | tar -xf - -C ${DAEMON_HOME}
+    SNAPSHOT_LINK=$(curl -s ${SNAPSHOT} | egrep -o ">20.*\.tar.lz4" | tr -d ">") \
+    curl ${SNAPSHOT_LINK} | lz4 -dc - | tar -xf - -C ${DAEMON_HOME}
 
 EXPOSE 26656 26657 1317 9090
 

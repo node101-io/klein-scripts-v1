@@ -18,7 +18,7 @@ services:
         MIN_GAS_PRICE: MIN_GAS_PRICE_PLACEHOLDER
         AVERAGE_GAS_PRICE: AVERAGE_GAS_PRICE_PLACEHOLDER
         DENOM: DENOM_PLACEHOLDER
-        SNAPSHOT: https://snapshots.kjnodes.com/cosmoshub-testnet/snapshot_latest.tar.lz4
+        SNAPSHOT: https://ss-rs.cosmos.nodestake.org/
     container_name: klein-node
     restart: always
     ports:
