@@ -1,24 +1,24 @@
 services:
-  cosmoshub:
+  warden:
     build:
       context: .
       args:
         GO_VERSION: 1.22
         REPO: REPO_PLACEHOLDER
-        PROJECT_FOLDER: gaia
+        PROJECT_FOLDER: wardenprotocol
         VERSION: VERSION_PLACEHOLDER
-        DAEMON_NAME: gaiad
+        DAEMON_NAME: wardend
         CHAIN_ID: CHAIN_ID_PLACEHOLDER
         MONIKER: MONIKER_PLACEHOLDER
         GENESIS_FILE: GENESIS_FILE_PLACEHOLDER # TODO: example.rpc/genesis_chunked
-        DAEMON_HOME: /root/.gaia
-        ADDRBOOK: https://snapshots.polkachu.com/testnet-addrbook/cosmos/addrbook.json
+        DAEMON_HOME: /root/.warden
+        ADDRBOOK: https://testnet-files.itrocket.net/warden/addrbook.json
         PEERS: PEERS_PLACEHOLDER
         SEEDS: SEEDS_PLACEHOLDER
         MIN_GAS_PRICE: MIN_GAS_PRICE_PLACEHOLDER
         AVERAGE_GAS_PRICE: AVERAGE_GAS_PRICE_PLACEHOLDER
         DENOM: DENOM_PLACEHOLDER
-        SNAPSHOT: https://ss-rs.cosmos.nodestake.org/
+        SNAPSHOT: https://testnet-files.itrocket.net/warden/snap_warden.tar.lz4
     container_name: klein-node
     restart: always
     ports:
@@ -27,7 +27,7 @@ services:
       - 1317:1317
       - 9090:9090
     volumes:
-      - klein-node-volume:/root/.gaia
+      - klein-node-volume:/root/.warden
       - klein-scripts-volume:/root/klein-scripts
 volumes:
   klein-node-volume:
